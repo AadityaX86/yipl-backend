@@ -1,6 +1,7 @@
 from datetime import datetime
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from app.utils.validation import is_valid_isbn10, is_valid_year
+from typing import List
 
 #AUTHOR SCHEMAS
 class AuthorCreate(BaseModel):
@@ -15,6 +16,12 @@ class AuthorOut(BaseModel):
     book_count: int | None = 0
     class Config: from_attributes = True
 
+class PaginatedAuthors(BaseModel):
+    data: List[AuthorOut]
+    total: int
+    limit: int
+    offset: int
+
 class BookOut(BaseModel):
     id: int
     title: str
@@ -23,6 +30,12 @@ class BookOut(BaseModel):
     author_id: int
     created_at: datetime
     class Config: from_attributes = True
+    
+class PaginatedBooks(BaseModel):
+    data: List[BookOut]
+    total: int
+    limit: int
+    offset: int
 
 class AuthorWithBooks(BaseModel):
     id: int

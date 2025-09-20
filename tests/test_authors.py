@@ -1,5 +1,5 @@
 ﻿from fastapi.testclient import TestClient
-from app.main import app
+from main import app
 client = TestClient(app)
 def test_create_author_success():
     r = client.post("/authors", json={"name":"Isaac Asimov","email":"asimov@example.com"})
